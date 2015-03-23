@@ -2,7 +2,7 @@
 
 [Sourdough](https://github.com/sourdough-css/) preprocessor.
 
-Provides a CLI and Node.js interface for a preprocessor based on:
+A preprocessor based on:
   - [css-whitespace](https://github.com/reworkcss/css-whitespace)
   - [postcss](https://github.com/postcss/postcss)
   - postcss-calc
