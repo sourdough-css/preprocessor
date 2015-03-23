@@ -1,0 +1,9 @@
+
+:root
+  --red: #F00
+
+body
+  color: var(--red)
+
+:root
+  --red: #0F0

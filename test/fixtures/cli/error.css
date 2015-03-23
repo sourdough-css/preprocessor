@@ -1,0 +1,14 @@
+
+/**
+ * Variables.
+ */
+
+:root
+  var-red: red
+
+/**
+ * Body.
+ */
+
+body
+  color: var(green

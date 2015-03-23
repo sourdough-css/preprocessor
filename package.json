@@ -1,0 +1,43 @@
+{
+  "name": "sourdough-preprocessor",
+  "version": "0.1.0",
+  "description": "A CSS preprocessor for working with Sourdough",
+  "main": "lib/index.js",
+  "bin": {
+    "sourdough": "bin/sourdough"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "dependencies": {
+    "autoprefixer-core": "^5.1.7",
+    "colors": "~0.6.2",
+    "commander": "~2.1.0",
+    "css-whitespace": "^1.1.1",
+    "node-watch": "0.3.4",
+    "pad-component": "0.0.1",
+    "postcss": "^4.0.6",
+    "postcss-calc": "^4.0.0",
+    "postcss-custom-media": "^3.0.0",
+    "postcss-custom-properties": "^3.1.0",
+    "postcss-import": "^5.0.3",
+    "read-file-stdin": "0.0.3",
+    "write-file-stdout": "0.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^1.20.1"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec --slow 400",
+    "watch": "mocha --watch --reporter spec --slow 400"
+  },
+  "keywords": [
+    "css",
+    "preprocessor",
+    "postcss",
+    "sourdough"
+  ],
+  "repository": "git://github.com/sourdough-css/preprocessor.git",
+  "license": "MIT"
+}
