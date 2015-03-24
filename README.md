@@ -59,11 +59,8 @@ var fs = require('fs');
 var css = fs.readFileSync('src/components/index.css', 'utf8');
 
 var bundle = preprocessor(css, {
-  alias: {
-    'components': 'src/components'
-  },
-  source: 'src/components/index.css',
-  sourcemap: true
+  from: 'src/components/index.css',
+  map: { inline: true }
 });
 
 fs.writeFileSync('build/bundle.css', bundle);
