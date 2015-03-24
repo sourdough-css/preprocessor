@@ -12,6 +12,8 @@ A preprocessor based on:
 
 ## Installation
 
+Install [iojs](http://iojs.org) (comes with npm).
+
 ```
 npm install sourdough-preprocessor
 ```
