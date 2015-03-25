@@ -1,5 +1,7 @@
 # sourdough-preprocessor
 
+[![Build Status](https://travis-ci.org/sourdough-css/preprocessor.svg?branch=master)](https://travis-ci.org/sourdough-css/preprocessor)
+
 [Sourdough](https://github.com/sourdough-css/) preprocessor.
 
 A preprocessor based on:
