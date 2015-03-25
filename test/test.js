@@ -12,7 +12,8 @@ var features = [
   'import',
   'import-plain',
   'prefixes',
-  'vars'
+  'vars',
+  'custom-selectors'
 ];
 
 /**
