@@ -45,13 +45,13 @@ Options:
 Examples:
 
   # pass an input and output file:
-  $ sourdough input.css output.css
+  $ sourdough input.syl output.css
 
   # watch the input file for changes:
-  $ sourdough --watch input.css output.css
+  $ sourdough --watch input.styl output.css
 
   # unix-style piping to stdin and stdout:
-  $ cat input.css | sourdough | grep background-color
+  $ cat input.styl | sourdough | grep background-color
 ```
 
 #### Node.js
@@ -60,10 +60,10 @@ Examples:
 var preprocessor = require('sourdough-preprocessor');
 var fs = require('fs');
 
-var css = fs.readFileSync('src/components/index.css', 'utf8');
+var css = fs.readFileSync('src/components/index.styl', 'utf8');
 
 var bundle = preprocessor(css, {
-  from: 'src/components/index.css',
+  from: 'src/components/index.styl',
   map: { inline: true }
 });
 
