@@ -1,6 +1,6 @@
 {
   "name": "sourdough-preprocessor",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "A CSS preprocessor for working with Sourdough",
   "main": "lib/index.js",
   "bin": {
@@ -17,12 +17,12 @@
     "css-whitespace": "pvalentim/css-whitespace#custom-selector",
     "node-watch": "0.3.4",
     "pad-component": "0.0.1",
-    "postcss": "^4.0.6",
+    "postcss": "^4.1.11",
     "postcss-calc": "^4.0.0",
     "postcss-custom-media": "^3.0.0",
     "postcss-custom-properties": "^3.1.0",
     "postcss-custom-selectors": "^1.1.0",
-    "postcss-import": "^5.0.3",
+    "postcss-import": "^5.2.2",
     "read-file-stdin": "0.0.3",
     "write-file-stdout": "0.0.2"
   },

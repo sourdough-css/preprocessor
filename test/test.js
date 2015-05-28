@@ -21,8 +21,11 @@ var features = [
  */
 
 describe('sourdough', function () {
-  it('should return a css string', function () {
-    assert('string' == typeof sourdough('body {}'));
+  it('should return a css string', function (done) {
+    sourdough('body {}').then(function(result){
+      assert('string' == typeof result.css);
+      done()
+    })
   });
 });
 
@@ -32,10 +35,13 @@ describe('sourdough', function () {
 
 describe('features', function () {
   features.forEach(function (name) {
-    it('should add ' + name + ' support', function () {
+    it('should add ' + name + ' support', function (done) {
       var input = read('fixtures/' + name);
       var output = read('fixtures/' + name + '.out', '.css');
-      assert.equal(sourdough(input, { root: 'test/fixtures' }).trim(), output.trim());
+      sourdough(input, { root: 'test/fixtures' }).then(function(result) {
+        assert.equal(result.css.trim(), output.trim());
+        done()
+      })
     });
   });
 });
@@ -107,15 +113,10 @@ describe('cli', function () {
     });
   });
 
-  xit('should print a nice error', function (done) {
+  it('should print a nice error', function (done) {
     exec('bin/sourdough test/fixtures/cli/error.styl', function (err, stdout, stderr) {
-      assert(err);
-      assert(err.code == 1);
-      assert(-1 != stderr.indexOf('error'));
-      assert(-1 != stderr.indexOf('SyntaxError: Missing closing parentheses'));
-      assert(-1 != stderr.indexOf('at '));
-      assert(-1 != stderr.indexOf('15'));
-      assert(-1 != stderr.indexOf('var('));
+      assert(-1 != stdout.indexOf('Unclosed bracket'));
+      assert(-1 != stdout.indexOf('var('));
       done();
     });
   });

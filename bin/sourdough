@@ -90,14 +90,19 @@ function run () {
     if (err) logger.throw(err)
     var css = buffer.toString()
 
-    try {
-      css = sourdough(css, { compress: program.compress, root: importRoot, from: input })
-    } catch (e) {
-      e.css = css
-      logger.throw(e)
-    }
+    var result = sourdough(css, { compress: program.compress, root: importRoot, from: input, to: output })
 
-    write(output, css + '\n')
-    if (verbose && output) logger.log('write', output)
+    result.then(function(result) {
+      css = result.css
+      write(output, css + '\n')
+      if (verbose && output) logger.log('write', output)
+    })
+    result.catch(function (error) {
+      if ( error.name === 'CssSyntaxError' ) {
+        logger.log(error.message + error.showSourceCode())
+      } else {
+        logger.throw(error)
+      }
+    })
   })
 }
