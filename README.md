@@ -14,7 +14,7 @@ A preprocessor based on:
 
 ## Installation
 
-Install [iojs](http://iojs.org) (comes with npm).
+Install [node.js](http://nodejs.org) (comes with npm).
 
 ```
 npm install sourdough-preprocessor
@@ -73,3 +73,4 @@ fs.writeFileSync('build/bundle.css', bundle);
 ## Acknowledgements
 
 Based on [SUIT CSS Preprocessor](https://github.com/suitcss/preprocessor) by Nicolas Gallagher.
+Watch function based on [postcss-cli](https://github.com/postcss/postcss-cli)

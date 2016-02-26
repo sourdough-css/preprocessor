@@ -12,9 +12,10 @@
   ],
   "dependencies": {
     "autoprefixer-core": "^5.1.7",
+    "chokidar": "^1.4.2",
     "colors": "~0.6.2",
     "commander": "~2.1.0",
-    "css-whitespace": "pvalentim/css-whitespace#custom-selector",
+    "css-whitespace": "pvalentim/css-whitespace",
     "node-watch": "0.3.4",
     "pad-component": "0.0.1",
     "postcss": "^4.1.11",

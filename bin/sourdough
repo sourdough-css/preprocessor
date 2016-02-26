@@ -8,8 +8,8 @@ var path = require('path')
 var resolve = path.resolve
 var program = require('commander')
 var read = require('read-file-stdin')
-var watch = require('node-watch')
 var write = require('write-file-stdout')
+var chokidar = require('chokidar')
 
 /**
  * Usage.
@@ -18,7 +18,6 @@ var write = require('write-file-stdout')
 program
   .version(require('../package.json').version)
   .usage('[<input>] [<output>]')
-  .option('-c, --compress', 'compress output')
   .option('-i, --import-root [path]', 'the root directory for imported css files', '')
   .option('-v, --verbose', 'log verbose output for debugging')
   .option('-w, --watch', 'watch the input file for changes')
@@ -76,9 +75,38 @@ run()
  * Watch?
  */
 
+var watchCSS
+
 if (regen) {
-  watch(input, run)
+  watchCSS = watcher(input)
   if (verbose) logger.log('watch', input)
+}
+
+function watcher (input) {
+  var watchedFiles = [input]
+  var index = {} // source files by entry point
+
+  var watcher = chokidar.watch(watchedFiles)
+  // recompile if any watched file is modified
+  watcher.on('change', function (path) {
+    logger.log('changed', path)
+    run(input)
+  })
+
+  return function updateWatchedFiles (files, entryPoint) {
+    // update source files for current entry point
+    entryPoint = entryPoint || null
+    index[entryPoint] = files
+    // aggregate source files across entry points
+    var entryPoints = Object.keys(index)
+    var sources = entryPoints.reduce(function (files, entryPoint) {
+      return files.concat(index[entryPoint])
+    }, [])
+    // update watch list
+    watcher.unwatch(watchedFiles)
+    watcher.add(sources)
+    watchedFiles = sources
+  }
 }
 
 /**
@@ -90,15 +118,23 @@ function run () {
     if (err) logger.throw(err)
     var css = buffer.toString()
 
-    var result = sourdough(css, { compress: program.compress, root: importRoot, from: input, to: output })
+    var onImportOptions = {
+      root: importRoot,
+      from: input,
+      to: output,
+      onImport: function (sources) {
+        if (watchCSS) watchCSS(sources, this.from)
+      }
+    }
+    var result = sourdough(css, onImportOptions)
 
-    result.then(function(result) {
+    result.then(function (result) {
       css = result.css
       write(output, css + '\n')
-      if (verbose && output) logger.log('write', output)
+      if (output) logger.log('write', output)
     })
     result.catch(function (error) {
-      if ( error.name === 'CssSyntaxError' ) {
+      if (error.name === 'CssSyntaxError') {
         logger.log(error.message + error.showSourceCode())
       } else {
         logger.throw(error)
