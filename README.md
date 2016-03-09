@@ -6,11 +6,17 @@
 
 A preprocessor based on:
   - [postcss](https://github.com/postcss/postcss)
-  - [sugarss](https://github.com/postcss/sugarss)
-  - postcss-calc
-  - postcss-custom-media
+  - sugarss
+  - autoprefixer
   - postcss-custom-properties
+  - postcss-custom-media
+  - postcss-custom-selectors
+  - postcss-calc
   - postcss-import
+  - postcss-media-minmax
+  - postcss-color-function
+  - postcss-nested
+
 
 ## Installation
 
@@ -56,18 +62,23 @@ Examples:
 #### Node.js
 
 ```js
-var preprocessor = require('sourdough-preprocessor');
-var fs = require('fs');
+var preprocessor = require('sourdough-preprocessor')
+var fs = require('fs')
 
-var css = fs.readFileSync('src/components/index.sss', 'utf8');
+var css = fs.readFileSync('src/components/index.sss', 'utf8')
 
-var bundle = preprocessor(css, {
+preprocessor(css, {
   from: 'src/components/index.sss',
   map: { inline: true }
-});
-
-fs.writeFileSync('build/bundle.css', bundle);
+}).then(result => {
+  fs.writeFileSync('build/bundle.css', result.css)
+})
 ```
+
+#### Gulp
+
+Visit [gulp-sourdough](https://github.com/sourdough-css/gulp-sourdough) to know more.
+
 
 ## Acknowledgements
 
