@@ -5,8 +5,8 @@
 [Sourdough](https://github.com/sourdough-css/) preprocessor.
 
 A preprocessor based on:
-  - [css-whitespace](https://github.com/reworkcss/css-whitespace)
   - [postcss](https://github.com/postcss/postcss)
+  - [sugarss](https://github.com/postcss/sugarss)
   - postcss-calc
   - postcss-custom-media
   - postcss-custom-properties
@@ -23,7 +23,7 @@ npm install sourdough-preprocessor
 ## Usage
 
 ```
-sourdough input.css output.css
+sourdough input.sss output.css
 ```
 
 ## API
@@ -35,7 +35,6 @@ Usage: sourdough [<input>] [<output>]
 
 Options:
 
-  -c, --compress             compress output
   -h, --help                 output usage information
   -i, --import-root [path]   the root directory for imported css files
   -v, --verbose              log verbose output for debugging
@@ -45,13 +44,13 @@ Options:
 Examples:
 
   # pass an input and output file:
-  $ sourdough input.syl output.css
+  $ sourdough input.sss output.css
 
   # watch the input file for changes:
-  $ sourdough --watch input.styl output.css
+  $ sourdough --watch input.sss output.css
 
   # unix-style piping to stdin and stdout:
-  $ cat input.styl | sourdough | grep background-color
+  $ cat input.sss | sourdough | grep background-color
 ```
 
 #### Node.js
@@ -60,10 +59,10 @@ Examples:
 var preprocessor = require('sourdough-preprocessor');
 var fs = require('fs');
 
-var css = fs.readFileSync('src/components/index.styl', 'utf8');
+var css = fs.readFileSync('src/components/index.sss', 'utf8');
 
 var bundle = preprocessor(css, {
-  from: 'src/components/index.styl',
+  from: 'src/components/index.sss',
   map: { inline: true }
 });
 
